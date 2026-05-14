@@ -41,7 +41,7 @@ loadAtt = 1
 
 # Initialization
 def __init__():
-  if callable(load) and callable(convertLevelToXP) and callable(normalizeString) and callable(convertToTime) and callable(retryFunction):
+  if callable(load) and callable(convertLevelToXP) and callable(normaliseString) and callable(convertToTime) and callable(retryFunction):
     print("Tool loaded after attempt " + str(loadAtt) + "!\n")
     load()
   else:
@@ -54,9 +54,9 @@ def __init__():
 
 # Main Function
 def load():
-  mobName = normalizeString(str(input("Enter Mob Name: ")).strip().lower())
+  mobName = normaliseString(str(input("Enter Mob Name: ")).strip().lower())
   while mobName not in mobs_xp_table:
-    mobName = normalizeString(input("Mob not found in database. Try again: "))
+    mobName = normaliseString(input("Mob not found in database. Try again: "))
   killRate = input("Enter Average Kills Per Second: ")
   while not killRate.isdigit() or int(killRate) <= 0:
     killRate = input("Kill rate must be a positive integer. Try again: ")
@@ -64,7 +64,7 @@ def load():
   while not startLevel.isdigit() or int(startLevel) < 0:
     startLevel = input("Starting level must be a non-negative integer. Try again: ")
   goalLevel = input("Enter Goal Level: ")
-  while int(goalLevel) <= int(startLevel):
+  while not goalLevel.isdigit or int(goalLevel) <= int(startLevel):
     goalLevel = input("Goal level must be greater than starting level. Try again: ")
 
   calculate(str(mobName), int(killRate), int(startLevel), int(goalLevel))
@@ -79,7 +79,7 @@ def convertLevelToXP(level: int):
   else:
     return (4.5 * level * level) - (162.5 * level) + 2220
 
-def normalizeString(string: str):
+def normaliseString(string: str):
   result = string.replace(" ", "").replace("_", "").replace("-", "")
   return result
 
